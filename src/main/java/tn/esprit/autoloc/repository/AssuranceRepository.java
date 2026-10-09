@@ -11,8 +11,6 @@ import java.util.Optional;
 @Repository
 public interface AssuranceRepository extends JpaRepository<Assurance, Long> {
 
-    Optional<Assurance> findByVehicule_IdVehicule(Long vehiculeId);
-
     Optional<Assurance> findByNumeroContrat(String numeroContrat);
 
     List<Assurance> findByDateExpirationBefore(LocalDate date);

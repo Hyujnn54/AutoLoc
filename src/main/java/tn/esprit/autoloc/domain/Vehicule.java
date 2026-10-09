@@ -1,20 +1,19 @@
 package tn.esprit.autoloc.domain;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import java.math.BigDecimal;
-import java.util.HashSet;
-import java.util.Set;
+import lombok.*;
+import lombok.experimental.FieldDefaults;
 
+import java.math.BigDecimal;
 @Entity
 @Table(name = "vehicule")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
+@FieldDefaults
+
 public class Vehicule {
 
     @Id
@@ -41,21 +40,4 @@ public class Vehicule {
     @Column(nullable = false, length = 20)
     private StatutVehicule statut;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "agence_id")
-    private Agence agence;
-
-    @ManyToMany
-    @JoinTable(
-            name = "vehicule_equipement",
-            joinColumns = @JoinColumn(name = "vehicule_id"),
-            inverseJoinColumns = @JoinColumn(name = "equipement_id")
-    )
-        private Set<Equipement> equipements = new HashSet<>();
-
-        @OneToMany(mappedBy = "vehicule", cascade = CascadeType.ALL, orphanRemoval = true)
-        private Set<Maintenance> maintenances = new HashSet<>();
-
-    @OneToMany(mappedBy = "vehicule")
-    private Set<Reservation> reservations = new HashSet<>();
 }

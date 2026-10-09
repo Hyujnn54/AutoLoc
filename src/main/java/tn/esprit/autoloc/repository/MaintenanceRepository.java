@@ -9,8 +9,6 @@ import java.util.List;
 @Repository
 public interface MaintenanceRepository extends JpaRepository<Maintenance, Long> {
 
-    List<Maintenance> findByVehicule_IdVehicule(Long vehiculeId);
-
     /** Maintenances encore en cours (pas de date de fin). */
     List<Maintenance> findByDateFinIsNull();
 }

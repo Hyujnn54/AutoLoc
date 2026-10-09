@@ -5,8 +5,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.HashSet;
-import java.util.Set;
 import java.time.LocalDate;
 
 @Entity
@@ -38,9 +36,4 @@ public class Client {
     @Column(nullable = false)
     private LocalDate dateInscription;
 
-    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Reservation> reservations = new HashSet<>();
-
-    @OneToOne(mappedBy = "client", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Contrat contrat;
 }

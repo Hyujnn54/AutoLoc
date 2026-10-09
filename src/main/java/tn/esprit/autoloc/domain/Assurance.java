@@ -24,7 +24,4 @@ public class Assurance {
     @Column(nullable = false)
     private LocalDate dateExpiration;
 
-    @OneToOne
-    @JoinColumn(name = "vehicule_id", nullable = false, unique = true)
-    private Vehicule vehicule;
 }
