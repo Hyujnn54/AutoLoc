@@ -10,5 +10,9 @@ import java.util.List;
 @Repository
 public interface EmployeRepository extends JpaRepository<Employe, Long> {
 
+    List<Employe> findByAgence_IdAgence(Long agenceId);
+
     List<Employe> findByRole(RoleEmploye role);
+
+    List<Employe> findByAgence_IdAgenceAndRole(Long agenceId, RoleEmploye role);
 }

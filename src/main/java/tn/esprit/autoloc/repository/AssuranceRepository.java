@@ -13,5 +13,7 @@ public interface AssuranceRepository extends JpaRepository<Assurance, Long> {
 
     Optional<Assurance> findByNumeroContrat(String numeroContrat);
 
+    Optional<Assurance> findByVehicule_IdVehicule(Long vehiculeId);
+
     List<Assurance> findByDateExpirationBefore(LocalDate date);
 }
