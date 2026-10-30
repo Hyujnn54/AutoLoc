@@ -3,12 +3,7 @@ package tn.esprit.autoloc.web.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import tn.esprit.autoloc.domain.Vehicule;
 import tn.esprit.autoloc.Services.IVehiculeService;
 
@@ -33,6 +28,22 @@ public class VehiculeController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Vehicule> getVehiculeById(@PathVariable Long id) {
-        return vehiculeService.getVehiculeById(id);
+        return vehiculeService.getVehiculeById(id)
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+    @PutMapping("/{id}")
+    public ResponseEntity<Vehicule> modifierVehicule(@RequestBody Vehicule vehicule, @PathVariable Long id) {
+        return ResponseEntity.ok(vehiculeService.modifierVehicule(vehicule, id));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> supprimerVehicule(@PathVariable Long id) {
+        try {
+            vehiculeService.supprimerVehicule(id);
+            return ResponseEntity.noContent().build();
+        } catch (IllegalArgumentException exception) {
+            return ResponseEntity.notFound().build();
+        }
     }
 }

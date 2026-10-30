@@ -12,4 +12,8 @@ public interface IVehiculeService {
     List<Vehicule> getAllVehicules();
 
     Optional<Vehicule> getVehiculeById(Long id);
+
+    Vehicule modifierVehicule(Vehicule vehicule, Long id);
+
+    void supprimerVehicule(Long id);
 }
